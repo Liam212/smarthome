@@ -1,0 +1,2 @@
+awful design and code practice 
+re write in nodejs
