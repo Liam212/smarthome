@@ -3,9 +3,8 @@ const fs = require('fs');
 
 let light = new Control("192.168.0.126");
 
-let rawdata = fs.readFileSync('color.json');
-let rgb = JSON.parse(rawdata);
-console.log(rgb);
+let data = fs.readFileSync('modules/magichome/color.json');
+let rgb = JSON.parse(data);
 
-light.setColor(rgb[0],rgb[1],rgb[2]);
-//modules/magichome/
+light.setColor(rgb.r,rgb.g,rgb.b);
+console.log("200 OK",rgb);
