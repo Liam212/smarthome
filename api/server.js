@@ -18,12 +18,10 @@ app.get('/api/state/', function (req, res) {
   }, 1000);
 });
 
-app.post('/api/power/', function (req, res) {
-    let id = req.body.id
-    response = magicHome.setState(id)
-    setTimeout(function () {
-      res.send(JSON.stringify(response, null, 2));
-    }, 1000);
+app.get('/api/power/:id', function (req, res) {
+    var id = req.params.id
+    magicHome.setState(id)
+    res.send("200 OK")
 });
 
 app.post('/api/color/', function (req, res) {

@@ -17,20 +17,45 @@ const fetchState = async (device) => {
 }
 
 const setState = async (id) => {
-  let light = new Control(file.devices[id].ip)
-  light.queryState().then(function(data) {
-    console.log(data)
-    state = data.on
-    if (state == false) {
-      light.setPower(true).then(success => {
-          return success
+  if (id == "all") {
+    file.devices.map(async device => {
+      let light = new Control(device.ip)
+      light.queryState().then(function(data) {
+        console.log(data)
+        state = data.on
+        if (state == false) {
+          light.setPower(true).then(success => {
+              return success
+          });
+        } else {
+          light.setPower(false).then(success => {
+              return success
+          });
+        }
       });
+    })
+  } else if (!isNaN(id)) {
+    if (id > file.devices.length - 1) {
+      console.log("This device does not exist")
     } else {
-      light.setPower(false).then(success => {
-          return success
+      let light = new Control(file.devices[id].ip)
+      light.queryState().then(function(data) {
+        console.log(data)
+        state = data.on
+        if (state == false) {
+          light.setPower(true).then(success => {
+              return success
+          });
+        } else {
+          light.setPower(false).then(success => {
+              return success
+          });
+        }
       });
     }
-  });
+  } else {
+    console.log("Error please enter the id of the device or all")
+  }
 }
 
 const setColor = async (rgb, id) => {
