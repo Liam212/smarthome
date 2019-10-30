@@ -3,3 +3,5 @@
 
  Currently supported devices:
  - Magic Home LED Controller (ESP-12E)
+
+v1.1.0

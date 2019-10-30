@@ -1,0 +1,26 @@
+{
+  "devices": [
+    {
+      "id": 0,
+      "name": "Desk",
+      "ip": "192.168.0.126",
+      "state": false,
+      "color": {
+        "red": 255,
+        "green": 176,
+        "blue": 0
+      }
+    },
+    {
+      "id": 1,
+      "name": "Speaker",
+      "ip": "192.168.0.163",
+      "state": false,
+      "color": {
+        "red": 26,
+        "green": 14,
+        "blue": 39
+      }
+    }
+  ]
+}

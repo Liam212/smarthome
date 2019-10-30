@@ -1,20 +1,20 @@
 const { Control } = require('magic-home');
+const fs = require('fs')
+var file = require("../../devices.json")
 
-let light = new Control("192.168.0.126");
-
-light.queryState().then(function(data) {
-        state = data.on
-
-        if (state == true) {
-          light.setPower(false).then(success => {
-            console.log('200 OK',success)
-          });
-        }
-
-        if (state == false) {
-          light.setPower(true).then('200 OK',success => {
-            console.log(success)
-          });
-        }
-
+const fetchState = async () => {
+  file.devices.map(async device => {
+    console.log(device.ip)
+    let light = new Control(device.ip)
+    light.queryState().then(function(data) {
+      device.state = data.on
+      device.color = data.color
+      fs.writeFile("../../devices.json", JSON.stringify(file, null, 2), function (err) {
+        if (err) return console.log(err);
+      });
+      console.log(data.on)
     });
+  })
+}
+
+fetchState()
