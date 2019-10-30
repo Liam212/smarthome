@@ -6,9 +6,9 @@
       "ip": "192.168.0.126",
       "state": false,
       "color": {
-        "red": 255,
-        "green": 176,
-        "blue": 0
+        "red": 0,
+        "green": 0,
+        "blue": 255
       }
     },
     {
@@ -17,9 +17,9 @@
       "ip": "192.168.0.163",
       "state": false,
       "color": {
-        "red": 26,
-        "green": 14,
-        "blue": 39
+        "red": 255,
+        "green": 0,
+        "blue": 0
       }
     }
   ]
