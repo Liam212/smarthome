@@ -11,51 +11,35 @@ const fetchState = async (device) => {
       fs.writeFile("devices.json", JSON.stringify(file, null, 2), function (err) {
         if (err) return console.log(err);
       });
-      console.log(device);
     });
   })
+  return file;
 }
 
 const setState = async (id) => {
   if (id == "all") {
     file.devices.map(async device => {
-      let light = new Control(device.ip)
-      light.queryState().then(function(data) {
-        console.log(data)
-        state = data.on
-        if (state == false) {
-          light.setPower(true).then(success => {
-              return success
-          });
-        } else {
-          light.setPower(false).then(success => {
-              return success
-          });
-        }
-      });
-    })
+      setPower(device.id)
+  })
   } else if (!isNaN(id)) {
     if (id > file.devices.length - 1) {
-      console.log("This device does not exist")
+      return {"error":"400", "message":"This device does not exist"}
     } else {
-      let light = new Control(file.devices[id].ip)
-      light.queryState().then(function(data) {
-        console.log(data)
-        state = data.on
-        if (state == false) {
-          light.setPower(true).then(success => {
-              return success
-          });
-        } else {
-          light.setPower(false).then(success => {
-              return success
-          });
-        }
-      });
+      setPower(id)
     }
   } else {
-    console.log("Error please enter the id of the device or all")
+    return {"error":"400", "message":"Please enter a correct device id"}
   }
+}
+
+const setPower = async (id) => {
+  let light = new Control(file.devices[id].ip)
+  light.queryState().then(function (response) {
+    let state = response.on
+    light.setPower(!state).then(success => {
+      return {"success":"200", "message":"The devices state has been updated"}
+    });
+  });
 }
 
 const setColor = async (rgb, id) => {

@@ -11,17 +11,22 @@ app.use(express.urlencoded());
 app.use(express.json());
 
 app.get('/api/state/', function (req, res) {
-  magicHome.fetchState()
-  setTimeout(function () {
-    res.header("Content-Type",'application/json');
-    res.send(JSON.stringify(file, null, 2));
-  }, 1000);
+  const response = magicHome.fetchState().then(function (response) {
+    setTimeout(() => {
+      res.header("Content-Type",'application/json');
+      res.send(JSON.stringify(response, null, 4));
+    }, 1000)
+  });
 });
 
 app.get('/api/power/:id', function (req, res) {
     var id = req.params.id
-    magicHome.setState(id)
-    res.send("200 OK")
+    const response = magicHome.setState(id).then(function (response) {
+      setTimeout(() => {
+        console.log(response)
+        res.send(response);
+      }, 1000)
+    });
 });
 
 app.post('/api/color/', function (req, res) {
