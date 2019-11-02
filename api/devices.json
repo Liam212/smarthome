@@ -4,9 +4,9 @@
       "id": 0,
       "name": "Desk",
       "ip": "192.168.0.126",
-      "state": false,
+      "state": true,
       "color": {
-        "red": 0,
+        "red": 255,
         "green": 0,
         "blue": 255
       }
@@ -19,7 +19,7 @@
       "color": {
         "red": 255,
         "green": 0,
-        "blue": 0
+        "blue": 255
       }
     }
   ]
