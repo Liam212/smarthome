@@ -43,11 +43,26 @@ const setPower = async (id) => {
 }
 
 const setColor = async (rgb, id) => {
-  let light = new Control(file.devices[id].ip)
-  light.setColor(rgb[0],rgb[1],rgb[2]).then(success => {
-    console.log(success)
-    return success
-  });
+  for (var i = 0; i < rgb.length; i++) {
+    if (!isNaN(rgb[i]) == false || rgb[i] > 255) {
+      return {"error":"400", "message":"Please enter a valid rgb value"}
+    } if (id > file.devices.length - 1) {
+        return {"error":"400", "message":"This device does not exist"}
+      }
+  }
+  if (id == "all") {
+    file.devices.map(async device => {
+      let light = new Control(device.ip)
+      light.setColor(rgb[0],rgb[1],rgb[2]).then(success => {
+        return success
+      });
+    });
+  } else {
+    let light = new Control(file.devices[id].ip)
+    light.setColor(rgb[0],rgb[1],rgb[2]).then(success => {
+      return success
+    });
+  }
 }
 
 module.exports = {

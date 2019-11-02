@@ -6,21 +6,22 @@
       "ip": "192.168.0.126",
       "state": true,
       "color": {
-        "red": 255,
-        "green": 0,
-        "blue": 255
+        "red": 0,
+        "green": 225,
+        "blue": 0
       }
     },
     {
       "id": 1,
       "name": "Speaker",
       "ip": "192.168.0.163",
-      "state": false,
+      "state": true,
       "color": {
-        "red": 255,
-        "green": 0,
-        "blue": 255
+        "red": 0,
+        "green": 225,
+        "blue": 0
       }
     }
   ]
+}
 }

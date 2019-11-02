@@ -29,13 +29,15 @@ app.get('/api/power/:id', function (req, res) {
     });
 });
 
-app.post('/api/color/', function (req, res) {
-    let rgb = [req.body.r, req.body.g, req.body.b]
-    let id = req.body.id
-    response = magicHome.setColor(rgb, id)
-    setTimeout(function () {
-      res.send(JSON.stringify(response, null, 2));
-    }, 1000);
+app.get('/api/color/:id/:rgb', function (req, res) {
+    let rgb = req.params.rgb.split(',');
+    var id = req.params.id
+    const response = magicHome.setColor(rgb, id).then(function (response) {
+      setTimeout(() => {
+        console.log(response)
+        res.send(response);
+      }, 1000)
+    });
 });
 
 var server = app.listen(8081, function () {
