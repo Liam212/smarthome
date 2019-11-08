@@ -4,24 +4,23 @@
       "id": 0,
       "name": "Desk",
       "ip": "192.168.0.126",
-      "state": true,
+      "state": false,
       "color": {
-        "red": 0,
-        "green": 225,
-        "blue": 0
+        "red": 103,
+        "green": 58,
+        "blue": 183
       }
     },
     {
       "id": 1,
       "name": "Speaker",
       "ip": "192.168.0.163",
-      "state": true,
+      "state": false,
       "color": {
-        "red": 0,
-        "green": 225,
-        "blue": 0
+        "red": 103,
+        "green": 58,
+        "blue": 183
       }
     }
   ]
-}
 }
