@@ -1,43 +1,38 @@
 var express = require('express');
 var app = express();
-var bodyParser = require("body-parser");
-const fs = require("fs");
-var magicHome = require("./api_modules/magichome/magichome.js")
-var file = require("./devices.json")
+var magicHome = require("./api_modules/magichome/magic-home-api.js")
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(express.urlencoded());
 app.use(express.json());
 
-app.get('/api/state/', function (req, res) {
-  const response = magicHome.fetchState().then(function (response) {
-    setTimeout(() => {
-      res.header("Content-Type",'application/json');
-      res.send(JSON.stringify(response, null, 4));
-    }, 1000)
-  });
+app.get('/api/state/:deviceId', async (req, res) => {
+  var deviceId = req.params.deviceId
+  const response = await magicHome.deviceState(deviceId)
+  res.header("Content-Type",'application/json');
+  res.send(JSON.stringify(response, null, 4));
 });
 
-app.get('/api/power/:id', function (req, res) {
-    var id = req.params.id
-    const response = magicHome.setState(id).then(function (response) {
-      setTimeout(() => {
-        console.log(response)
-        res.send(response);
-      }, 1000)
-    });
+app.get('/api/state/', async (req, res) => {
+  const response = await magicHome.fetchAllDevices()
+  res.header("Content-Type",'application/json');
+  res.send(JSON.stringify(response, null, 4));
 });
 
-app.get('/api/color/:id/:rgb', function (req, res) {
-    let rgb = req.params.rgb.split(',');
-    var id = req.params.id
-    const response = magicHome.setColor(rgb, id).then(function (response) {
-      setTimeout(() => {
-        console.log(response)
-        res.send(response);
-      }, 1000)
-    });
+app.get('/api/power/:deviceId', async (req, res) => {
+  var deviceId = req.params.deviceId
+  const response = await magicHome.setState(deviceId)
+  res.header("Content-Type",'application/json');
+  res.send(JSON.stringify(response, null, 4));
+});
+
+app.get('/api/color/:deviceId/:deviceColor', async (req, res) => {
+    let deviceColor = req.params.deviceColor.split(',');
+    var deviceId = req.params.deviceId
+    const response = await magicHome.setColor(deviceId, deviceColor)
+    res.header("Content-Type",'application/json');
+    res.send(JSON.stringify(response, null, 4));
 });
 
 var server = app.listen(8081, function () {
