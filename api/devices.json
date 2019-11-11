@@ -1,26 +1,12 @@
-{
-  "devices": [
+[
     {
-      "id": 0,
-      "name": "Desk",
-      "ip": "192.168.0.126",
-      "state": false,
-      "color": {
-        "red": 103,
-        "green": 58,
-        "blue": 183
-      }
+        "address": "192.168.0.126",
+        "id": "C44F3390BB54",
+        "model": "AK001-ZJ210"
     },
     {
-      "id": 1,
-      "name": "Speaker",
-      "ip": "192.168.0.163",
-      "state": false,
-      "color": {
-        "red": 103,
-        "green": 58,
-        "blue": 183
-      }
+        "address": "192.168.0.163",
+        "id": "C44F3390CA79",
+        "model": "AK001-ZJ210"
     }
-  ]
-}
+]
